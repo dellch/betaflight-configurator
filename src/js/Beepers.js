@@ -114,4 +114,11 @@ class Beepers {
             }
         }
     }
+    deselectAll(){
+        for (let i = 0; i < self._beepers.length; i++){
+            if (self._beepers[i].visible){
+                $(`beeper-${i}`).prop('checked', false);
+            }
+        }
+    }
 }

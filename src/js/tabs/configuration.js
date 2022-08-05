@@ -1,6 +1,8 @@
 import semver from 'semver';
 import { i18n } from '../localization';
 
+export { configuration };
+
 const configuration = {
     analyticsChanges: {},
 };
@@ -524,7 +526,6 @@ configuration.initialize = function (callback) {
                 checkUpdateGpsControls();
             }
         });
-
         $('input[id="accHardwareSwitch"]').change(function() {
             if(semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
               const checked = $(this).is(':checked');
@@ -545,6 +546,10 @@ configuration.initialize = function (callback) {
         });
 
         checkUpdateGpsControls();
+
+        $('#deselect-all-beepers').on('click', function() {
+            $('.condition.toggle').toggle(false);
+        });
 
         $('a.save').on('click', function() {
             // gather data that doesn't have automatic change event bound
@@ -639,7 +644,7 @@ configuration.initialize = function (callback) {
             MSP.send_message(MSPCodes.MSP_STATUS);
         }, 250, true);
         GUI.content_ready(callback);
-    }
+    };
 };
 
 configuration.cleanup = function (callback) {
@@ -647,4 +652,3 @@ configuration.cleanup = function (callback) {
 };
 
 window.TABS.configuration = configuration;
-export { configuration };
